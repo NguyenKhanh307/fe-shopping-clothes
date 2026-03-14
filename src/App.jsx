@@ -1,0 +1,19 @@
+import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import UsersPage from './pages/UserPage';
+import HomePage from './pages/HomePage';
+
+function App() {
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/users" element={<UsersPage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  )
+}
+
+export default App
