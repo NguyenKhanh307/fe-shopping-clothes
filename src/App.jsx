@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import Layout from './components/layout/Layout';
 // import AppRouter from './routes/AppRouter';
-
+import AboutUs from './pages/AboutUs';
 function App() {
   return (
     <>
@@ -23,6 +23,7 @@ function App() {
           {/* Tất cả các route nằm trong Layout sẽ có chung Header và Footer */}
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<AboutUs />} />
             {/* Các route khác thêm sau: /shop, /cart, /checkout... */}
           </Route>
         </Routes>

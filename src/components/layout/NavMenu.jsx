@@ -30,15 +30,29 @@ const NavMenu = () => {
             </li>
             <li><Link to="/flash-deals">Flash Deals</Link></li>
             <li>
-                <Link to="#">pages <i className="fas fa-chevron-down"></i></Link>
-                <ul className="menu_droapdown">
-                    <li><Link to="/about">about us</Link></li>
-                    <li><Link to="/cart">cart view</Link></li>
-                    <li><Link to="/checkout">checkout</Link></li>
-                    <li><Link to="/faq">FAQ's</Link></li>
-                    <li><Link to="/sign-in">sign in</Link></li>
-                    {/* Bạn có thể bổ sung thêm các page khác từ HTML gốc vào đây */}
-                </ul>
+            <li>
+    <Link to="#">pages <i className="fas fa-chevron-down"></i></Link>
+    <ul className="menu_droapdown">
+        <li><Link to="/about">about us</Link></li>
+        <li><Link to="/category">Category</Link></li>
+        <li><Link to="/brand">Brand</Link></li>
+        <li><Link to="/cart">cart view</Link></li>
+        <li><Link to="/wishlist">wishlist</Link></li>
+        <li><Link to="/compare">compare</Link></li>
+        <li><Link to="/checkout">checkout</Link></li>
+        <li><Link to="/payment-success">payment success</Link></li>
+        <li><Link to="/track-order">track order</Link></li>
+        <li><Link to="/404">error/404</Link></li>
+        <li><Link to="/faq">FAQ's</Link></li>
+        <li><Link to="/privacy-policy">privacy Policy</Link></li>
+        <li><Link to="/terms-condition">terms and condition</Link></li>
+        <li><Link to="/return-policy">return policy</Link></li>
+        <li><Link to="/sign-in">sign in</Link></li>
+        <li><Link to="/sign-up">sign up</Link></li>
+        <li><Link to="/forgot-password">forgot password</Link></li>
+        <li><Link to="/dashboard">Dashboard</Link></li>
+    </ul>
+</li>
             </li>
             <li>
                 <Link to="/blog">blog <i className="fas fa-chevron-down"></i></Link>
