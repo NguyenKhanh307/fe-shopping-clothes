@@ -5,6 +5,10 @@ import Home from './pages/Home';
 import Layout from './components/layout/Layout';
 // import AppRouter from './routes/AppRouter';
 import AboutUs from './pages/AboutUs';
+import Category from './pages/Category';
+import Brand from './pages/Brand';
+// Thêm vào trong Routes:
+
 function App() {
   return (
     <>
@@ -24,6 +28,8 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/category" element={<Category />} />
+            <Route path="/brand" element={<Brand />} />
             {/* Các route khác thêm sau: /shop, /cart, /checkout... */}
           </Route>
         </Routes>
