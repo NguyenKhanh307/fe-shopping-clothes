@@ -39,7 +39,7 @@ CSS INDEX
 /*===========================
     GLOBAL CSS START
 ===========================*/
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&amp;family=Oregano:ital@0;1&amp;family=Roboto:ital,wght@0,100..900;1,100..900&amp;display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
     margin: 0;
@@ -142,9 +142,9 @@ button {
     --colorWhite: #ffffff;
     --lightBg: #edf5ff;
     --lightBg2: #F5F5F5;
-    --headingFont: "Jost", serif;
-    --bodyFont: "Roboto", serif;
-    --cursiveFont: "Oregano", serif;
+    --headingFont: "Be Vietnam Pro", sans-serif;
+    --bodyFont: "Be Vietnam Pro", sans-serif;
+    --cursiveFont: "Be Vietnam Pro", sans-serif;
     --ratingColor: #F9A61C;
     --boxShadow: rgb(149 157 165 / 16%) 0px 3px 22px;
 }
@@ -12195,21 +12195,23 @@ footer {
 ========================================= */
 
 /* 1. Reset toàn bộ style và ép chữ phải hiện ra */
-select.select_2, 
+select.select_2,
 select.select_js {
     -webkit-appearance: none !important;
     -moz-appearance: none !important;
     appearance: none !important;
     background-color: #f3f4f7 !important;
-    color: #111 !important; /* Bắt buộc màu chữ phải là xám đậm */
-    font-size: 15px !important; /* Bắt buộc cỡ chữ phải hiện */
+    color: #111 !important;
+    /* Bắt buộc màu chữ phải là xám đậm */
+    font-size: 15px !important;
+    /* Bắt buộc cỡ chữ phải hiện */
     line-height: 1.5 !important;
     border: 1px solid transparent !important;
     padding: 0 35px 0 20px !important;
     cursor: pointer !important;
     outline: none !important;
     font-weight: 500 !important;
-    
+
     /* Icon mũi tên */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
     background-repeat: no-repeat !important;
@@ -12217,7 +12219,7 @@ select.select_js {
     background-size: 14px !important;
 }
 
-select.select_2:focus, 
+select.select_2:focus,
 select.select_js:focus {
     border-color: #ddd !important;
 }
@@ -12229,8 +12231,9 @@ select.select_js:focus {
     border-right: 1px solid #ddd !important;
     border-radius: 30px 0 0 30px !important;
     padding-left: 25px !important;
-    min-width: 170px !important; /* Cố định chiều rộng */
-    width: 170px !important; 
+    min-width: 170px !important;
+    /* Cố định chiều rộng */
+    width: 170px !important;
 }
 
 /* 3. Khung input tìm kiếm */
@@ -12264,7 +12267,8 @@ select.select_js:focus {
     margin-left: 10px !important;
     padding: 0 30px 0 15px !important;
     background-color: #f3f4f7 !important;
-    min-width: 110px !important; /* Đủ rộng để hiển thị chữ English */
+    min-width: 110px !important;
+    /* Đủ rộng để hiển thị chữ English */
 }
 
 /* =========================================
@@ -12272,17 +12276,18 @@ select.select_js:focus {
 ========================================= */
 
 /* 1. Ép Slider và Banner bên phải cao đúng bằng nhau (ví dụ: 450px) */
-.banner_slider_2, 
+.banner_slider_2,
 .banner_2_add {
-    height: 450px !important; 
-    border-radius: 15px !important; /* Bo góc mềm mại */
+    height: 450px !important;
+    border-radius: 15px !important;
+    /* Bo góc mềm mại */
     overflow: hidden !important;
 }
 
 /* 2. Ép các thẻ div ẩn của thư viện react-slick phải nở to ra 100% */
 .banner_2_slider .slick-list,
 .banner_2_slider .slick-track,
-.banner_2_slider .slick-slide > div {
+.banner_2_slider .slick-slide>div {
     height: 100% !important;
 }
 
@@ -12314,7 +12319,8 @@ select.select_js:focus {
 
 /* 2. Tiêu đề: Phông chữ serif và hiệu ứng vòng tròn màu cam */
 .special_product_text h2 {
-    font-family: serif !important; /* Ép phông chữ có chân */
+    font-family: serif !important;
+    /* Ép phông chữ có chân */
     font-size: 32px;
     font-weight: bold;
     color: #111;
@@ -12335,11 +12341,13 @@ select.select_js:focus {
     left: -15px;
     width: 140%;
     height: 140%;
-    background-image: url(/assets/images/trending_shape.png); /* Nhớ copy ảnh 'trending_shape.png' vào thư mục images nhé! */
+    background-image: url(/assets/images/trending_shape.png);
+    /* Nhớ copy ảnh 'trending_shape.png' vào thư mục images nhé! */
     background-repeat: no-repeat;
     background-position: left center;
     background-size: cover;
-    z-index: -1; /* Đẩy ra sau chữ */
+    z-index: -1;
+    /* Đẩy ra sau chữ */
 }
 
 /* 3. Navigation Tabs (Hủy bỏ style mặc định của nav-pills) */
@@ -12353,7 +12361,8 @@ select.select_js:focus {
 
 .special_product_content .nav-pills .nav-link {
     background-color: transparent !important;
-    color: #555 !important; /* Màu xám mặc định */
+    color: #555 !important;
+    /* Màu xám mặc định */
     border: none !important;
     padding: 10px 20px !important;
     border-radius: 0 !important;
@@ -12364,13 +12373,42 @@ select.select_js:focus {
 /* 4. Style cho mục active (Viền cam, chữ cam) */
 .special_product_content .nav-pills .nav-link.active {
     border: 1px solid #ffaa00 !important;
-    border-radius: 30px !important; /* Bo tròn viền */
-    color: #ffaa00 !important; /* Chữ màu cam */
-    background-color: transparent !important; /* Tránh nền mặc định của Bootstrap */
+    border-radius: 30px !important;
+    /* Bo tròn viền */
+    color: #ffaa00 !important;
+    /* Chữ màu cam */
+    background-color: transparent !important;
+    /* Tránh nền mặc định của Bootstrap */
     padding: 10px 20px !important;
 }
 
 /* Đảm bảo mục 'Shoes' trong hình 10 không có viền xám mặc định */
 .nav-link#pills-shoes-tab {
-     border: none !important;
+    border: none !important;
+}
+
+/* =========================================
+   FIX LỖI TÀNG HÌNH NÚT GO BACK (TRANG 404)
+========================================= */
+.error_text .common_btn {
+    background-color: #ffaa00 !important;
+    /* Ép nền màu cam chủ đạo */
+    color: #ffffff !important;
+    /* Ép chữ màu trắng */
+    border: 1px solid #ffaa00 !important;
+    /* Ép viền màu cam */
+    padding: 12px 35px !important;
+    border-radius: 30px !important;
+}
+
+/* Hiệu ứng khi di chuột vào (Hover) đổi sang màu đen cho sang trọng */
+.error_text .common_btn:hover {
+    background-color: #111111 !important;
+    color: #ffffff !important;
+    border-color: #111111 !important;
+}
+
+/* Đảm bảo icon mũi tên cũng cùng màu chữ */
+.error_text .common_btn i {
+    color: inherit !important;
 }

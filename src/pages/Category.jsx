@@ -1,46 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import PageBanner from '../components/common/PageBanner'; // Tái sử dụng PageBanner của trang About
+import PageBanner from '../components/common/PageBanner';
+import categoryService from '../services/categoryService';
 
 const Category = () => {
-    // 1. Khai báo Breadcrumb cho Page Banner
     const breadcrumbData = [
-        { label: 'Home', link: '/' },
-        { label: 'Category', link: null }
+        { label: 'Trang Chủ', link: '/' },
+        { label: 'Danh Mục',  link: null },
     ];
 
-    // 2. Mock Data: Danh sách các danh mục (Sau này sẽ thay bằng dữ liệu từ API)
-    // Tôi tạo sẵn 12 item dựa trên hình ảnh của template để minh họa
-    const categoriesData = [
-        { id: 1, name: "Men's Fashion", image: "/assets/images/category_img_2.png", link: "/shop" },
-        { id: 2, name: "Women's Fashion", image: "/assets/images/category_img_3.png", link: "/shop" },
-        { id: 3, name: "Kids Fashion", image: "/assets/images/category_img_1.png", link: "/shop" },
-        { id: 4, name: "Beauty & Health", image: "/assets/images/category_img_4.png", link: "/shop" },
-        { id: 5, name: "Jewelry", image: "/assets/images/category_img_5.png", link: "/shop" },
-        { id: 6, name: "Sports Wear", image: "/assets/images/category_img_6.png", link: "/shop" },
-        { id: 7, name: "Electronics", image: "/assets/images/category_img_7.png", link: "/shop" },
-        { id: 8, name: "Men's Fashion", image: "/assets/images/category_img_2.png", link: "/shop" },
-        { id: 9, name: "Women's Fashion", image: "/assets/images/category_img_3.png", link: "/shop" },
-        { id: 10, name: "Kids Fashion", image: "/assets/images/category_img_1.png", link: "/shop" },
-        { id: 11, name: "Beauty & Health", image: "/assets/images/category_img_4.png", link: "/shop" },
-        { id: 12, name: "Jewelry", image: "/assets/images/category_img_5.png", link: "/shop" }
-    ];
+    const [categories, setCategories] = useState([]);
+    const [loading, setLoading]       = useState(true);
+    const [error, setError]           = useState(null);
+
+    useEffect(() => {
+        categoryService.getAllCategories()
+            .then(data => setCategories(data))
+            .catch(err => setError(err.message))
+            .finally(() => setLoading(false));
+    }, []);
 
     return (
         <>
-            {/* KHỐI 1: BANNER ĐẦU TRANG */}
-            <PageBanner title="Category" breadcrumb={breadcrumbData} />
+            <PageBanner title="Danh Mục" breadcrumb={breadcrumbData} />
 
-            {/* KHỐI 2: DANH SÁCH CATEGORY */}
             <section className="category_page category_2 mt_75 mb_95">
                 <div className="container">
                     <div className="row">
-                        {/* Dùng .map() để duyệt qua mảng data và render ra các ô Category */}
-                        {categoriesData.map((category) => (
+                        {loading && (
+                            <p className="text-center py-5">Đang tải danh mục...</p>
+                        )}
+                        {error && (
+                            <p className="text-center py-5 text-danger">Không thể tải dữ liệu.</p>
+                        )}
+                        {!loading && !error && categories.length === 0 && (
+                            <p className="text-center py-5">Chưa có danh mục nào.</p>
+                        )}
+                        {!loading && !error && categories.map((category) => (
                             <div key={category.id} className="col-xl-2 col-6 col-sm-4 col-md-3 wow fadeInUp">
                                 <Link to={category.link} className="category_item">
                                     <div className="img">
-                                        <img src={category.image} alt={category.name} className="img-fluid w-100" />
+                                        <img
+                                            src={category.image}
+                                            alt={category.name}
+                                            className="img-fluid w-100"
+                                        />
                                     </div>
                                     <h3>{category.name}</h3>
                                 </Link>
@@ -48,7 +52,7 @@ const Category = () => {
                         ))}
                     </div>
 
-                    {/* KHỐI 3: PHÂN TRANG (PAGINATION) */}
+                    {/* Phân trang */}
                     <div className="row">
                         <div className="pagination_area">
                             <nav aria-label="Category Pagination">
@@ -63,9 +67,6 @@ const Category = () => {
                                     </li>
                                     <li className="page-item">
                                         <Link className="page-link" to="#">02</Link>
-                                    </li>
-                                    <li className="page-item">
-                                        <Link className="page-link" to="#">03</Link>
                                     </li>
                                     <li className="page-item">
                                         <Link className="page-link" to="#">
