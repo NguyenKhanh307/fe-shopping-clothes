@@ -1,0 +1,14 @@
+/**
+ * CSS gom một chỗ: chỉ trỏ tới file thật sự có trong ./css + thư viện npm.
+ * Bootstrap: import trong main.jsx (tránh trùng bootstrap.min.css cũ trong assets).
+ */
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+@import './css/animate.css';
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
+@import './css/mobile_menu.css';
+@import './css/scroll_button.css';
+@import './css/multiple-image-video.css';
+@import './css/custom_spacing.css';
+@import './css/style.css';
+@import './css/responsive.css';
