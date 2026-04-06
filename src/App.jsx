@@ -1,31 +1,22 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import UsersPage from './pages/UserPage';
-// import HomePage from './pages/HomePage';
 import Home from './pages/Home';
 import Layout from './components/layout/Layout';
-// import AppRouter from './routes/AppRouter';
 import AboutUs from './pages/AboutUs';
 import Category from './pages/Category';
 import Brand from './pages/Brand';
 import Blog from './pages/Blog';
 import Error404 from './pages/Error404';
 import ContactUs from './pages/ContactUs';
-// Thêm vào trong Routes:
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import ShopDetails from './pages/ShopDetails';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
-    <>
-      {/* <AppRouter /> */}
-      {/* <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/users" element={<UsersPage />} />
-          {/* Thêm các route khác sau */}
-      {/* </Routes> */}
-
-      {/* </BrowserRouter> */}
-      <BrowserRouter>
-
+    <BrowserRouter>
+      {/* AuthProvider bọc toàn bộ app để mọi component đều truy cập được trạng thái đăng nhập */}
+      <AuthProvider>
         <Routes>
           {/* Tất cả các route nằm trong Layout sẽ có chung Header và Footer */}
           <Route element={<Layout />}>
@@ -35,12 +26,14 @@ function App() {
             <Route path="/brand" element={<Brand />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/shop/:id" element={<ShopDetails />} />
             <Route path="*" element={<Error404 />} />
           </Route>
         </Routes>
-
-      </BrowserRouter>
-    </>
+      </AuthProvider>
+    </BrowserRouter>
   )
 }
 

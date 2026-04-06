@@ -332,16 +332,16 @@ INSERT INTO categories (name, slug, image_url, sort_order) VALUES
 -- (dựa theo Brands.jsx: brand1.png … brand10.png)
 -- ─────────────────────────────────────────────────────────────
 INSERT INTO brands (name, logo_url) VALUES
-    ('Việt Phong',     '/assets/images/brand1.png'),
-    ('Sài Gòn Style',  '/assets/images/brand2.png'),
-    ('Hà Nội Mode',    '/assets/images/brand3.png'),
-    ('Áo Dài Việt',    '/assets/images/brand4.png'),
-    ('Phố Thị',        '/assets/images/brand5.png'),
-    ('Mộc Nhiên',      '/assets/images/brand6.png'),
-    ('Xuân Thu',       '/assets/images/brand7.png'),
-    ('Nam Định Denim', '/assets/images/brand8.png'),
-    ('Lotus Fashion',  '/assets/images/brand9.png'),
-    ('Bắc Phong',      '/assets/images/brand10.png');
+    ('Brand Alpha',   '/assets/images/brand1.png'),
+    ('Brand Beta',    '/assets/images/brand2.png'),
+    ('Brand Gamma',   '/assets/images/brand3.png'),
+    ('Brand Delta',   '/assets/images/brand4.png'),
+    ('Brand Epsilon', '/assets/images/brand5.png'),
+    ('Brand Zeta',    '/assets/images/brand6.png'),
+    ('Brand Eta',     '/assets/images/brand7.png'),
+    ('Brand Theta',   '/assets/images/brand8.png'),
+    ('Brand Iota',    '/assets/images/brand9.png'),
+    ('Brand Kappa',   '/assets/images/brand10.png');
 
 -- ─────────────────────────────────────────────────────────────
 -- SEED: products
