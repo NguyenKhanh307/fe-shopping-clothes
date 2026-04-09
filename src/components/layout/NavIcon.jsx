@@ -74,8 +74,8 @@ const NavIcons = ({ onOpenCart }) => {
             {/* Tài khoản người dùng */}
             <li>
                 {isLoggedIn ? (
-                    // Đã đăng nhập → hiển thị tên và đi đến dashboard
-                    <Link className="user" to="/dashboard" title="Tài khoản của tôi">
+                    // Đã đăng nhập → hiển thị tên và đi đến trang hồ sơ
+                    <Link className="user" to="/dashboard-profile" title="Hồ sơ của tôi">
                         <b>
                             <img src="assets/images/user_icon_black.svg" alt="Tài khoản" className="img-fluid" />
                         </b>

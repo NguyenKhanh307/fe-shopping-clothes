@@ -11,7 +11,6 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ShopDetails from './pages/ShopDetails';
 import { AuthProvider } from './context/AuthContext';
-
 function App() {
   return (
     <BrowserRouter>

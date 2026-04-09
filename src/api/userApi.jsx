@@ -16,9 +16,8 @@ export const getNewArrivalProducts = () => axiosInstance.get('/products/new-arri
 export const getFavouriteProducts = () => axiosInstance.get('/products/favourite');
 export const getSpecialProducts = () => axiosInstance.get('/products/special');
 
-// ─── User CRUD API ────────────────────────────────────────────────────────────
-export const getUsers = () => axiosInstance.get('/users');
-export const getUserById = (id) => axiosInstance.get(`/users/${id}`);
-export const createUser = (data) => axiosInstance.post('/users', data);
-export const updateUser = (id, data) => axiosInstance.patch(`/users/${id}`, data);
-export const deleteUser = (id) => axiosInstance.delete(`/users/${id}`);
+// export const getUsers = () => api.get('/users');
+// export const getUserById = (id) => api.get(`/users/${id}`);
+// export const createUser = (data) => api.post('/users', data);
+// export const updateUser = (id, data) => api.patch(`/users/${id}`, data);
+// export const deleteUser = (id) => api.delete(`/users/${id}`);
