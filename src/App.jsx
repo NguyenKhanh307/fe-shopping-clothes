@@ -12,6 +12,9 @@ import SignUp from './pages/SignUp';
 import ShopDetails from './pages/ShopDetails';
 import DashboardProfile from "./pages/DashboardProfile";
 import { AuthProvider } from './context/AuthContext';
+import Cart from './pages/Cart';
+import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
 function App() {
   return (
     <BrowserRouter>

@@ -20,26 +20,23 @@ const Header = () => {
                     </div>
 
                     {/* Search Form */}
-                    {/* ĐÃ SỬA LỖI: col-xXl thành col-xxl */}
                     <div className="col-xxl-6 col-xl-5 col-lg-5 d-none d-lg-block">
                         <form action="#">
-                            <select className="select_2" defaultValue="All Categories">
-                                <option value="All Categories">All Categories</option>
-                                <option value="Fashion">Fashion</option>
-                                <option value="Electronics">Electronics</option>
-                                <option value="Fashion & Beauty">Fashion & Beauty</option>
-                                <option value="Jewelry">Jewelry</option>
-                                <option value="Grocery">Grocery</option>
+                            <select className="select_2" defaultValue="Tất cả danh mục">
+                                <option value="Tất cả danh mục">Tất cả danh mục</option>
+                                <option value="Thời trang">Thời trang</option>
+                                <option value="Điện tử">Điện tử</option>
+                                <option value="Thời trang & Làm đẹp">Thời trang & Làm đẹp</option>
+                                <option value="Trang sức">Trang sức</option>
                             </select>
                             <div className="input">
-                                <input type="text" placeholder="Search your product..." />
+                                <input type="text" placeholder="Tìm kiếm sản phẩm..." />
                                 <button type="submit" aria-label="Search"><i className="fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
                             </div>
                         </form>
                     </div>
 
                     {/* Hotline & Language/Currency */}
-                    {/* ĐÃ SỬA LỖI: col-xXl thành col-xxl */}
                     <div className="col-xxl-4 col-xl-5 col-lg-5 d-none d-lg-flex">
                         <div className="header_support_user d-flex flex-wrap">
                             <div className="header_support">
@@ -49,19 +46,19 @@ const Header = () => {
                                 <h3>
                                     Hotline:
                                     <a href="callto:1234567890">
-                                        <span>+(402) 763 282 46</span>
+                                        <span>+(84) 90 1234 567</span>
                                     </a>
                                 </h3>
                             </div>
                         </div>
                         <div className="topbar_right d-flex flex-wrap align-items-center justify-content-end">
-                            <select className="select_js language" defaultValue="English">
-                                <option value="English">English</option>
-                                <option value="Arabic">Arabic</option>
+                            <select className="select_js language" defaultValue="Tiếng Việt">
+                                <option value="Tiếng Việt">Tiếng Việt</option>
+                                <option value="Tiếng Anh">Tiếng Anh</option>
                             </select>
-                            <select className="select_js" defaultValue="$USD">
+                            <select className="select_js" defaultValue="VNĐ">
+                                <option value="VNĐ">VNĐ</option>
                                 <option value="$USD">$USD</option>
-                                <option value="€EUR">€EUR</option>
                             </select>
                         </div>
                     </div>

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useCart } from '../../context/CartContext';
 
 const NavIcons = ({ onOpenCart }) => {
-    const { isLoggedIn, user } = useAuth();
+    const { isLoggedIn, user, logout } = useAuth();
+    const { cartItems } = useCart();
     const navigate = useNavigate();
 
     // Hàm xử lý khi click vào các thao tác yêu cầu đăng nhập
@@ -17,14 +19,10 @@ const NavIcons = ({ onOpenCart }) => {
         }
     };
 
-    // Xử lý mở giỏ hàng (cũng cần đăng nhập)
+    // Xử lý mở giỏ hàng
     const handleCartOpen = (e) => {
         e.preventDefault();
-        if (!isLoggedIn) {
-            navigate('/sign-in', { state: { from: '/' } });
-        } else {
-            onOpenCart();
-        }
+        onOpenCart();
     };
 
     return (
@@ -37,7 +35,7 @@ const NavIcons = ({ onOpenCart }) => {
                     onClick={(e) => requireLogin(e, '/compare')}
                 >
                     <b>
-                        <img src="assets/images/compare_black.svg" alt="So sánh" className="img-fluid" />
+                        <i className="fas fa-random" style={{ fontSize: '20px' }}></i>
                     </b>
                     <span>2</span>
                 </a>
@@ -51,29 +49,36 @@ const NavIcons = ({ onOpenCart }) => {
                     onClick={(e) => requireLogin(e, '/wishlist')}
                 >
                     <b>
-                        <img src="assets/images/love_black.svg" alt="Yêu thích" className="img-fluid" />
+                        <i className="far fa-heart" style={{ fontSize: '20px' }}></i>
                     </b>
                     <span>5</span>
                 </a>
             </li>
 
-            {/* Giỏ hàng — yêu cầu đăng nhập */}
+            {/* Giỏ hàng */}
             <li>
                 <a
                     href="#!"
                     title="Giỏ hàng"
-                    onClick={handleCartOpen}
+                    onClick={(e) => {
+                        if (!isLoggedIn) {
+                            requireLogin(e, '/cart');
+                        } else {
+                            handleCartOpen(e);
+                        }
+                    }}
                 >
                     <b>
-                        <img src="assets/images/cart_black.svg" alt="Giỏ hàng" className="img-fluid" />
+                        <i className="fas fa-shopping-bag" style={{ fontSize: '20px' }}></i>
                     </b>
-                    <span>2</span>
+                    {cartItems.length > 0 && <span>{cartItems.length}</span>}
                 </a>
             </li>
 
             {/* Tài khoản người dùng */}
             <li>
                 {isLoggedIn ? (
+<<<<<<< HEAD
                     // Đã đăng nhập → hiển thị tên và đi đến trang hồ sơ
                     <Link className="user" to="/dashboard-profile" title="Hồ sơ của tôi">
                         <b>
@@ -81,14 +86,42 @@ const NavIcons = ({ onOpenCart }) => {
                         </b>
                         <h5>{user?.full_name?.split(' ').slice(-1)[0] || 'Tài khoản'}</h5>
                     </Link>
+=======
+                    // Đã đăng nhập → hiển thị tên với dropdown Đăng xuất thay vì vào dashboard
+                    <>
+                        <a className="user" href="#!" onClick={(e) => e.preventDefault()} title="Hồ sơ của tôi">
+                            <b>
+                                <i className="far fa-user" style={{ fontSize: '20px' }}></i>
+                            </b>
+                            <h5>{user?.full_name?.split(' ').slice(-1)[0] || 'Tài khoản'}</h5>
+                        </a>
+                        <ul className="user_dropdown">
+                            <li>
+                                <a href="#!" onClick={(e) => {
+                                    e.preventDefault();
+                                    logout();
+                                    navigate('/');
+                                }}>
+                                    <i className="fas fa-sign-out-alt"></i> Đăng xuất
+                                </a>
+                            </li>
+                        </ul>
+                    </>
+>>>>>>> origin/main
                 ) : (
-                    // Chưa đăng nhập → hiển thị "Đăng nhập"
-                    <Link className="user" to="/sign-in" title="Đăng nhập">
-                        <b>
-                            <img src="assets/images/user_icon_black.svg" alt="Đăng nhập" className="img-fluid" />
-                        </b>
-                        <h5>Đăng nhập</h5>
-                    </Link>
+                    // Chưa đăng nhập → hiển thị "Đăng nhập" với dropdown
+                    <>
+                        <a className="user" href="#!" onClick={(e) => e.preventDefault()} title="Tài khoản">
+                            <b>
+                                <i className="far fa-user" style={{ fontSize: '20px' }}></i>
+                            </b>
+                            <h5>Tài khoản</h5>
+                        </a>
+                        <ul className="user_dropdown">
+                            <li><Link to="/sign-in"><i className="fas fa-sign-in-alt"></i> Đăng nhập</Link></li>
+                            <li><Link to="/sign-up"><i className="far fa-user-plus"></i> Đăng ký</Link></li>
+                        </ul>
+                    </>
                 )}
             </li>
         </ul>

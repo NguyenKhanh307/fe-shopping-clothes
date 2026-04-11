@@ -57,13 +57,13 @@ const Blog = () => {
                                                 <ul className="top">
                                                     <li>
                                                         <span>
-                                                            <img src="/assets/images/user_icon_black.svg" alt="user" className="img-fluid w-100" />
+                                                            <i className="far fa-user"></i>
                                                         </span>
                                                         {blog.author}
                                                     </li>
                                                     <li>
                                                         <span>
-                                                            <img src="/assets/images/calender.png" alt="date" className="img-fluid w-100" />
+                                                            <i className="far fa-calendar-alt"></i>
                                                         </span>
                                                         {blog.date}
                                                     </li>
@@ -141,7 +141,7 @@ const Blog = () => {
                                                 <div className="popular_blog_text">
                                                     <p>
                                                         <span>
-                                                            <img src="/assets/images/calender.png" alt="icon" className="img-fluid w-100" />
+                                                            <i className="far fa-calendar-alt"></i>
                                                         </span>
                                                         {pop.date}
                                                     </p>
