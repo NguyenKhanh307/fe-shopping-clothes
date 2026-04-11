@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import PageBanner from '../components/common/PageBanner';
 import { useAuth } from '../context/AuthContext';
 import { registerUser } from '../api/userApi';
@@ -29,6 +29,10 @@ const SignUp = () => {
 
     const { login } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    // Nếu có trang cần quay lại sau khi đăng ký thành công
+    const from = location.state?.from || '/';
 
     // ─── Validate form phía client ────────────────────────────────────────
     const validate = () => {
@@ -113,7 +117,7 @@ const SignUp = () => {
             if (data.token) {
                 localStorage.setItem('zenis_token', data.token);
                 login(data.user || data);
-                navigate('/', { replace: true });
+                navigate(from, { replace: true });
             } else {
                 // Server chỉ tạo tài khoản, chuyển sang trang đăng nhập
                 navigate('/sign-in', {

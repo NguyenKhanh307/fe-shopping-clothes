@@ -217,10 +217,9 @@ const SignIn = () => {
                                     </div>
                                 </form>
 
-                                {/* Chưa có tài khoản */}
                                 <p className="dont_account">
                                     Chưa có tài khoản?{' '}
-                                    <Link to="/sign-up">Đăng ký ngay</Link>
+                                    <Link to="/sign-up" state={location.state}>Đăng ký ngay</Link>
                                 </p>
 
                                 <p className="or">hoặc</p>

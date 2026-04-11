@@ -56,30 +56,30 @@ const MobileMenu = ({ show, handleClose }) => {
                 <ul className="mobile_menu_header d-flex flex-wrap">
                     <li>
                         <a href="/compare" onClick={(e) => requireLogin(e, '/compare')} title="So sánh">
-                            <b><img src="assets/images/compare_black.svg" alt="So sánh" /></b>
+                            <b><i className="fas fa-random" style={{ fontSize: '20px' }}></i></b>
                             <span>2</span>
                         </a>
                     </li>
                     <li>
                         <a href="/wishlist" onClick={(e) => requireLogin(e, '/wishlist')} title="Yêu thích">
-                            <b><img src="assets/images/love_black.svg" alt="Yêu thích" /></b>
+                            <b><i className="far fa-heart" style={{ fontSize: '20px' }}></i></b>
                             <span>4</span>
                         </a>
                     </li>
                     <li>
                         <a href="/cart" onClick={(e) => requireLogin(e, '/cart')} title="Giỏ hàng">
-                            <b><img src="assets/images/cart_black.svg" alt="Giỏ hàng" /></b>
+                            <b><i className="fas fa-shopping-bag" style={{ fontSize: '20px' }}></i></b>
                             <span>5</span>
                         </a>
                     </li>
                     <li>
                         {isLoggedIn ? (
                             <Link to="/dashboard" onClick={handleClose} title="Tài khoản">
-                                <b><img src="assets/images/user_icon_black.svg" alt="Tài khoản" /></b>
+                                <b><i className="far fa-user" style={{ fontSize: '20px' }}></i></b>
                             </Link>
                         ) : (
                             <Link to="/sign-in" onClick={handleClose} title="Đăng nhập">
-                                <b><img src="assets/images/user_icon_black.svg" alt="Đăng nhập" /></b>
+                                <b><i className="far fa-user" style={{ fontSize: '20px' }}></i></b>
                             </Link>
                         )}
                     </li>
@@ -88,7 +88,7 @@ const MobileMenu = ({ show, handleClose }) => {
                 {/* Hiển thị thông tin user nếu đã đăng nhập */}
                 {isLoggedIn && (
                     <div className="d-flex align-items-center gap-2 mb-3 p-2" style={{ background: '#f8f9fa', borderRadius: '8px' }}>
-                        <img src="assets/images/user_icon_black.svg" alt="user" style={{ width: 28 }} />
+                        <i className="far fa-user-circle" style={{ fontSize: '28px', color: '#333' }}></i>
                         <div>
                             <div style={{ fontWeight: 600, fontSize: '14px' }}>{user?.full_name || 'Người dùng'}</div>
                             <div style={{ fontSize: '12px', color: '#888' }}>{user?.email}</div>

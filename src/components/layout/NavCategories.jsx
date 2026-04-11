@@ -12,11 +12,11 @@ const NavCategories = () => {
                     <span>
                         <img src="/assets/images/bar_icon_white.svg" alt="category icon" />
                     </span>
-                    Browse Categories
+                    Danh mục sản phẩm
                 </p>
                 <i className="fas fa-chevron-down"></i>
             </div>
-            
+
             <ul className="menu_cat_item">
                 <li>
                     <Link to="/shop">
@@ -25,7 +25,7 @@ const NavCategories = () => {
                     </Link>
                     <ul className="menu_cat_droapdown">
                         <li>
-                            <Link to="/shop">shirts <i className="fal fa-angle-right"></i></Link>
+                            <Link to="/shop">shirts <i className="fas fa-angle-right"></i></Link>
                             <ul className="sub_category">
                                 <li><Link to="/shop">Casual Shirts</Link> </li>
                                 <li><Link to="/shop">Formal Shirts</Link></li>
@@ -33,7 +33,7 @@ const NavCategories = () => {
                             </ul>
                         </li>
                         <li>
-                            <Link to="/shop">pant <i className="fal fa-angle-right"></i></Link>
+                            <Link to="/shop">pant <i className="fas fa-angle-right"></i></Link>
                             <ul className="sub_category">
                                 <li><Link to="/shop">Casual Pants</Link></li>
                                 <li><Link to="/shop">Formal Trousers</Link> </li>
@@ -52,7 +52,7 @@ const NavCategories = () => {
                     <ul className="menu_cat_droapdown">
                         <li><Link to="/shop">sharee</Link></li>
                         <li>
-                            <Link to="/shop">Shirts <i className="fal fa-angle-right"></i></Link>
+                            <Link to="/shop">Shirts <i className="fas fa-angle-right"></i></Link>
                             <ul className="sub_category">
                                 <li><Link to="/shop">Full Sleeves</Link> </li>
                                 <li><Link to="/shop">Half Sleeves</Link></li>

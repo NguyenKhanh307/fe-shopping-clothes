@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Tab, Nav } from 'react-bootstrap';
 import PageBanner from '../components/common/PageBanner';
 import { getProductById } from '../api/userApi';
+import { useCart } from '../context/CartContext';
 
 // ─── Fallback cho các trường DB chưa có ──────────────────────────────────────
 const FALLBACK = {
@@ -44,6 +45,8 @@ const StarRating = ({ rating }) => {
 
 const ShopDetails = () => {
     const { id } = useParams();
+    const { addItemToCart } = useCart();
+    const navigate = useNavigate();
 
     // ─── State ────────────────────────────────────────────────────────────────
     const [product, setProduct] = useState(null);
@@ -149,12 +152,12 @@ const ShopDetails = () => {
                         <div className="col-xl-6 col-lg-6 wow fadeInLeft">
                             <div className="shop_details_img">
                                 {/* Ảnh lớn */}
-                                <div className="product_large_img">
+                                <div className="product_large_img premium-gallery-main">
                                     <img
                                         src={activeImage}
                                         alt={product.name}
                                         className="img-fluid w-100"
-                                        style={{ borderRadius: '12px', objectFit: 'cover', maxHeight: '500px' }}
+                                        style={{ borderRadius: '16px', objectFit: 'cover', maxHeight: '500px' }}
                                         onError={(e) => { e.target.src = FALLBACK.images[0]; }}
                                     />
                                 </div>
@@ -163,14 +166,8 @@ const ShopDetails = () => {
                                     {gallery.map((img, idx) => (
                                         <div key={idx} className="col-3">
                                             <div
+                                                className={`premium-thumb ${activeImage === img ? 'active' : ''}`}
                                                 onClick={() => setActiveImage(img)}
-                                                style={{
-                                                    cursor: 'pointer',
-                                                    borderRadius: '8px',
-                                                    overflow: 'hidden',
-                                                    border: activeImage === img ? '2px solid #f5a623' : '2px solid transparent',
-                                                    transition: 'border 0.2s',
-                                                }}
                                             >
                                                 <img
                                                     src={img}
@@ -204,27 +201,15 @@ const ShopDetails = () => {
 
                                 {/* Giá — từ DB: salePrice, originalPrice */}
                                 <h4>
-                                    {formatVND(product.salePrice)}
+                                    <span className="gradient-text">{formatVND(product.salePrice)}</span>
                                     {product.originalPrice && product.originalPrice > product.salePrice && (
                                         <del style={{ marginLeft: '12px', color: '#aaa', fontSize: '18px' }}>
                                             {formatVND(product.originalPrice)}
                                         </del>
                                     )}
-                                    {product.discountPercent > 0 && (
-                                        <span
-                                            className="ms-2"
-                                            style={{
-                                                background: '#f5a623',
-                                                color: '#fff',
-                                                padding: '2px 8px',
-                                                borderRadius: '4px',
-                                                fontSize: '13px',
-                                                fontWeight: 700,
-                                            }}
-                                        >
-                                            -{product.discountPercent}%
-                                        </span>
-                                    )}
+                                    <span className="ms-2 tag-sale">
+                                        -{product.discountPercent}%
+                                    </span>
                                 </h4>
 
                                 {/* Mô tả — từ DB: description, fallback hardcode */}
@@ -237,15 +222,17 @@ const ShopDetails = () => {
                                     {/* Size (hardcode fallback — DB không có) */}
                                     <div className="shop_details_size">
                                         <p>Chọn Kích Thước :</p>
-                                        <select
-                                            className="select_js"
-                                            value={selectedSize}
-                                            onChange={(e) => setSelectedSize(e.target.value)}
-                                        >
+                                        <div className="d-flex flex-wrap mt-2">
                                             {FALLBACK.sizes.map((s) => (
-                                                <option key={s} value={s}>{s}</option>
+                                                <div
+                                                    key={s}
+                                                    className={`size-pill ${selectedSize === s ? 'active' : ''}`}
+                                                    onClick={() => setSelectedSize(s)}
+                                                >
+                                                    {s}
+                                                </div>
                                             ))}
-                                        </select>
+                                        </div>
                                     </div>
 
                                     {/* Màu — từ DB: colors[].hexCode / colors[].colorName */}
@@ -255,14 +242,9 @@ const ShopDetails = () => {
                                             {colors.map((c, idx) => (
                                                 <li
                                                     key={idx}
-                                                    title={c.colorName || c.hexCode}
+                                                    className={`color-swatch ${selectedColor === c.hexCode ? 'active' : ''}`}
                                                     onClick={() => setSelectedColor(c.hexCode)}
-                                                    style={{
-                                                        background: c.hexCode,
-                                                        cursor: 'pointer',
-                                                        outline: selectedColor === c.hexCode ? '2px solid #f5a623' : 'none',
-                                                        outlineOffset: '2px',
-                                                    }}
+                                                    style={{ background: c.hexCode }}
                                                 />
                                             ))}
                                         </ul>
@@ -272,24 +254,27 @@ const ShopDetails = () => {
                                 {/* Số lượng & Thêm vào giỏ */}
                                 <div className="details_quentity_area d-flex flex-wrap">
                                     <div className="details_quentity_area_left d-flex flex-wrap align-items-center">
-                                        <div className="quentity_btn">
-                                            <button className="btn btn-danger" onClick={handleDecrement}>
-                                                <i className="fa-solid fa-minus" />
+                                        <div className="modern-quantity-ctl d-inline-flex">
+                                            <button type="button" onClick={handleDecrement}>
+                                                <i className="fas fa-minus" />
                                             </button>
                                             <input type="text" value={quantity} readOnly />
-                                            <button className="btn btn-success" onClick={handleIncrement}>
-                                                <i className="fa-solid fa-plus" />
+                                            <button type="button" onClick={handleIncrement}>
+                                                <i className="fas fa-plus" />
                                             </button>
                                         </div>
-                                        <Link className="common_btn" to="/cart">
-                                            Thêm vào giỏ
-                                        </Link>
+                                        <button className="btn-glow ms-3" onClick={() => {
+                                            addItemToCart(product.id, quantity, selectedColor).then(success => {
+                                                if (success) alert("Thêm vào giỏ hàng thành công!");
+                                                else navigate('/sign-in', { state: { from: '/cart' } });
+                                            });
+                                        }}>
+                                            Thêm vào giỏ <i className="fas fa-shopping-cart"></i>
+                                        </button>
                                     </div>
-                                    <div className="details_quentity_area_right d-flex flex-wrap align-items-center">
-                                        <Link to="/wishlist"><i className="fa-regular fa-heart" /></Link>
-                                        <Link to="/compare">
-                                            <img src="/assets/images/compare_icon_black.svg" alt="compare" className="img-fluid" />
-                                        </Link>
+                                    <div className="details_quentity_area_right d-flex flex-wrap align-items-center mt-3 mt-sm-0">
+                                        <Link className="btn-icon-soft ms-2" to="/wishlist" title="Yêu thích"><i className="far fa-heart" /></Link>
+                                        <Link className="btn-icon-soft ms-2" to="/compare" title="So sánh"><i className="fas fa-random"></i></Link>
                                     </div>
                                 </div>
 
@@ -340,7 +325,7 @@ const ShopDetails = () => {
                 <div className="container">
                     <Tab.Container id="product-tabs" defaultActiveKey="description">
 
-                        <div className="product_details_tab_menu">
+                        <div className="product_details_tab_menu premium-tabs">
                             <Nav variant="pills" className="nav-pills justify-content-center border-bottom pb-3 mb-4">
                                 <Nav.Item><Nav.Link eventKey="description">Mô Tả Sản Phẩm</Nav.Link></Nav.Item>
                                 <Nav.Item><Nav.Link eventKey="information">Thông Tin Thêm</Nav.Link></Nav.Item>
@@ -461,9 +446,9 @@ const ShopDetails = () => {
                                             <li className="discount"><b>-</b> {prod.discount}</li>
                                         </ul>
                                         <ul className="btn_list">
-                                            <li><Link to="#"><img src="/assets/images/compare_icon_white.svg" alt="Compare" className="img-fluid" /></Link></li>
-                                            <li><Link to="#"><img src="/assets/images/love_icon_white.svg" alt="Love" className="img-fluid" /></Link></li>
-                                            <li><Link to="/cart"><img src="/assets/images/cart_icon_white.svg" alt="Cart" className="img-fluid" /></Link></li>
+                                            <li><Link to="#"><i className="fas fa-random"></i></Link></li>
+                                            <li><Link to="#"><i className="far fa-heart"></i></Link></li>
+                                            <li><Link to="/cart"><i className="fas fa-shopping-bag"></i></Link></li>
                                         </ul>
                                     </div>
                                     <div className="product_text">

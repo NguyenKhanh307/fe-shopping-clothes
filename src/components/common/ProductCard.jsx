@@ -1,7 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
 
 const ProductCard = ({ product }) => {
+    const { addItemToCart } = useCart();
+    const navigate = useNavigate();
+
+    const handleAddToCart = (e) => {
+        e.preventDefault();
+        addItemToCart(product.id, 1, product.colors && product.colors.length > 0 ? product.colors[0].hexCode : null).then(success => {
+            if (success) alert("Đã thêm vào giỏ hàng");
+            else navigate('/sign-in', { state: { from: '/cart' } });
+        });
+    };
+
     return (
         <div className="product_item_2 product_item">
             <div className="product_img">
@@ -18,17 +30,17 @@ const ProductCard = ({ product }) => {
                 <ul className="btn_list">
                     <li>
                         <a href="#!" onClick={(e) => e.preventDefault()}>
-                            <img src="../../assets/images/compare_icon_white.svg" alt="Compare" className="img-fluid" />
+                            <i className="fas fa-random"></i>
                         </a>
                     </li>
                     <li>
                         <a href="#!" onClick={(e) => e.preventDefault()}>
-                            <img src="assets/images/love_icon_white.svg" alt="Love" className="img-fluid" />
+                            <i className="far fa-heart"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="#!" onClick={(e) => e.preventDefault()}>
-                            <img src="assets/images/cart_icon_white.svg" alt="Cart" className="img-fluid" />
+                        <a href="#!" onClick={handleAddToCart} title="Thêm vào giỏ">
+                            <i className="fas fa-shopping-bag"></i>
                         </a>
                     </li>
                 </ul>

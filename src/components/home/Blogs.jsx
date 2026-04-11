@@ -45,13 +45,13 @@ const Blogs = () => {
                                     <ul className="top">
                                         <li>
                                             <span>
-                                                <img src="assets/images/user_icon_black.svg" alt="user" className="img-fluid" />
+                                                <i className="far fa-user"></i>
                                             </span>
                                             {blog.author}
                                         </li>
                                         <li>
                                             <span>
-                                                <img src="assets/images/calender.png" alt="date" className="img-fluid" />
+                                                <i className="far fa-calendar-alt"></i>
                                             </span>
                                             {blog.date}
                                         </li>
