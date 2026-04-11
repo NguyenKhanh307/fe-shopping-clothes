@@ -10,7 +10,9 @@ import ContactUs from './pages/ContactUs';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ShopDetails from './pages/ShopDetails';
+import DashboardProfile from "./pages/DashboardProfile";
 import { AuthProvider } from './context/AuthContext';
+
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/shop/:id" element={<ShopDetails />} />
+            <Route path="/dashboard-profile" element={<DashboardProfile />} />
             <Route path="*" element={<Error404 />} />
           </Route>
         </Routes>
