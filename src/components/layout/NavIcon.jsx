@@ -78,15 +78,6 @@ const NavIcons = ({ onOpenCart }) => {
             {/* Tài khoản người dùng */}
             <li>
                 {isLoggedIn ? (
-<<<<<<< HEAD
-                    // Đã đăng nhập → hiển thị tên và đi đến trang hồ sơ
-                    <Link className="user" to="/dashboard-profile" title="Hồ sơ của tôi">
-                        <b>
-                            <img src="assets/images/user_icon_black.svg" alt="Tài khoản" className="img-fluid" />
-                        </b>
-                        <h5>{user?.full_name?.split(' ').slice(-1)[0] || 'Tài khoản'}</h5>
-                    </Link>
-=======
                     // Đã đăng nhập → hiển thị tên với dropdown Đăng xuất thay vì vào dashboard
                     <>
                         <a className="user" href="#!" onClick={(e) => e.preventDefault()} title="Hồ sơ của tôi">
@@ -96,6 +87,11 @@ const NavIcons = ({ onOpenCart }) => {
                             <h5>{user?.full_name?.split(' ').slice(-1)[0] || 'Tài khoản'}</h5>
                         </a>
                         <ul className="user_dropdown">
+                            <li>
+                                <Link to="/dashboard-profile">
+                                    <i className="fas fa-user-circle"></i> Hồ sơ của tôi
+                                </Link>
+                            </li>
                             <li>
                                 <a href="#!" onClick={(e) => {
                                     e.preventDefault();
@@ -107,7 +103,6 @@ const NavIcons = ({ onOpenCart }) => {
                             </li>
                         </ul>
                     </>
->>>>>>> origin/main
                 ) : (
                     // Chưa đăng nhập → hiển thị "Đăng nhập" với dropdown
                     <>

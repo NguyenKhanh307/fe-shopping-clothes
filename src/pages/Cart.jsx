@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import PageBanner from '../components/common/PageBanner';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
+import { checkoutOrder } from '../services/orderService';
 
 const formatVND = (num) => {
     if (num == null) return null;
@@ -10,14 +12,28 @@ const formatVND = (num) => {
 };
 
 const Cart = () => {
-    const { cartItems, subTotal, isLoading, updateItemQuantity, removeCartItem, clearCartItems } = useCart();
+    const { cartItems, subTotal, isLoading, updateItemQuantity, removeCartItem, refreshCart } = useCart();
+    const { user } = useAuth();
     const [showSuccessModal, setShowSuccessModal] = React.useState(false);
+    const [checkoutError, setCheckoutError] = React.useState('');
     const navigate = useNavigate();
 
     const handleCheckout = async (e) => {
         e.preventDefault();
-        await clearCartItems();
-        setShowSuccessModal(true);
+        setCheckoutError('');
+        if (!user?.id) {
+            navigate('/sign-in', { state: { from: '/cart' } });
+            return;
+        }
+        try {
+            // Gọi API tạo đơn hàng (backend sẽ tự xóa giỏ hàng)
+            await checkoutOrder(user.id);
+            // Refresh giỏ để frontend biết giỏ đã trống
+            await refreshCart();
+            setShowSuccessModal(true);
+        } catch (err) {
+            setCheckoutError(err.message || 'Thanh toán thất bại, vui lòng thử lại.');
+        }
     };
 
     const handleCloseModal = () => {
@@ -131,6 +147,9 @@ const Cart = () => {
                                     <li>Tích lũy <span>0₫</span></li>
                                     <li className="total">Tổng cộng <span>{formatVND(subTotal)}</span></li>
                                 </ul>
+                                {checkoutError && (
+                                    <div className="alert alert-danger py-2 mt-2 small">{checkoutError}</div>
+                                )}
                                 <a href="#!" className="btn-glow mt-2" onClick={handleCheckout}>
                                     Thanh toán ngay <i className="fas fa-arrow-right"></i>
                                 </a>
