@@ -15,6 +15,8 @@ import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import Cart from './pages/Cart';
 import DashboardOrder from './pages/DashboardOrder';
+
+import AdminApp from "./admin/AdminApp";
 function App() {
   return (
     <BrowserRouter>
@@ -38,6 +40,7 @@ function App() {
               <Route path="/dashboard-order" element={<DashboardOrder />} />
               <Route path="*" element={<Error404 />} />
             </Route>
+            <Route path="/admin/*" element={<AdminApp />} />
           </Routes>
         </CartProvider>
       </AuthProvider>
