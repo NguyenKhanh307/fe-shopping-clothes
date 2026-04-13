@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE = "http://localhost:8080/products";
+const BASE = `${import.meta.env.VITE_API_URL}/products`;
 
 // Lấy tất cả sản phẩm bằng cách gộp các endpoint hiện có
 export const getProductsAdmin = async () => {
