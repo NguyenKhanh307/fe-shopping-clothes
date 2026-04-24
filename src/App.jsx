@@ -15,6 +15,7 @@ import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import Cart from './pages/Cart';
 import DashboardOrder from './pages/DashboardOrder';
+import SearchResults from './pages/SearchResults';
 
 import AdminApp from "./admin/AdminApp";
 function App() {
@@ -38,6 +39,7 @@ function App() {
               <Route path="/cart" element={<Cart />} />
               <Route path="/dashboard-profile" element={<DashboardProfile />} />
               <Route path="/dashboard-order" element={<DashboardOrder />} />
+              <Route path="/search" element={<SearchResults />} />
               <Route path="*" element={<Error404 />} />
             </Route>
             <Route path="/admin/*" element={<AdminApp />} />

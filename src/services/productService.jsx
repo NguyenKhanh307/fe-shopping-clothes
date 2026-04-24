@@ -46,6 +46,10 @@ const productService = {
     // Chi tiết 1 sản phẩm
     getProductById: (id) =>
         axiosClient.get(`/products/${id}`).then(res => mapProduct(res.data)),
+
+    // Tìm kiếm sản phẩm theo từ khoá — gọi GET /products/search?keyword=...
+    searchProducts: (keyword) =>
+        axiosClient.get('/products/search', { params: { keyword } }).then(res => res.data.map(mapProduct)),
 };
 
 export default productService;

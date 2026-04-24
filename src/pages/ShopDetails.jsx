@@ -278,41 +278,151 @@ const ShopDetails = () => {
                                     </div>
                                 </div>
 
-                                {/* Thông tin phụ */}
-                                <ul className="details_more_info">
-                                    {/* SKU từ DB: slug */}
-                                    <li><span>Mã SP:</span> {product.slug || product.id}</li>
-                                    {/* Stock từ DB */}
-                                    {product.stock != null && (
-                                        <li>
-                                            <span>Tồn kho:</span>{' '}
-                                            <span style={{ color: product.stock > 0 ? '#27ae60' : '#e74c3c' }}>
-                                                {product.stock > 0 ? `${product.stock} sản phẩm` : 'Hết hàng'}
-                                            </span>
-                                        </li>
-                                    )}
-                                    {/* Danh mục (hardcode fallback — category bị @JsonIgnore) */}
-                                    <li>
-                                        <span>Danh mục:</span>{' '}
-                                        <Link to="/category">{FALLBACK.category}</Link>
-                                    </li>
-                                    {/* Tags hardcode */}
-                                    <li>
-                                        <span>Thẻ:</span>{' '}
-                                        {FALLBACK.tags.map((tag, idx) => (
-                                            <Link key={idx} to="#">{tag}{idx < FALLBACK.tags.length - 1 ? ', ' : ''}</Link>
-                                        ))}
-                                    </li>
-                                </ul>
+                                {/* ─── Thông tin bổ sung (Đã custom) ─── */}
+                                <div className="details_extra_info mt-4 pt-4 border-top">
+                                    <div className="d-flex flex-column gap-3">
+                                        
+                                        {/* SKU & Tồn kho */}
+                                        <div className="d-flex flex-wrap gap-4 align-items-center">
+                                            <div style={{ fontSize: '14px', color: '#555' }}>
+                                                <span className="fw-bold me-2" style={{ color: '#222' }}>Mã SP:</span> 
+                                                {product.slug || product.id}
+                                            </div>
+                                            {product.stock != null && (
+                                                <div style={{ fontSize: '14px', display: 'flex', alignItems: 'center' }}>
+                                                    <span className="fw-bold me-2" style={{ color: '#222' }}>Tình trạng:</span>
+                                                    <span className="badge rounded-pill" style={{ 
+                                                        backgroundColor: product.stock > 0 ? '#e8f5e9' : '#ffebee', 
+                                                        color: product.stock > 0 ? '#2e7d32' : '#c62828',
+                                                        padding: '6px 12px',
+                                                        fontWeight: '600',
+                                                        border: `1px solid ${product.stock > 0 ? '#c8e6c9' : '#ffcdd2'}`
+                                                    }}>
+                                                        {product.stock > 0 ? `Còn ${product.stock} sản phẩm` : 'Hết hàng'}
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </div>
 
-                                {/* Chia sẻ */}
-                                <ul className="details_share d-flex flex-wrap">
-                                    <li><span>Chia sẻ:</span></li>
-                                    <li><Link to="#"><i className="fa-brands fa-facebook-f" /></Link></li>
-                                    <li><Link to="#"><i className="fa-brands fa-twitter" /></Link></li>
-                                    <li><Link to="#"><i className="fa-brands fa-linkedin-in" /></Link></li>
-                                    <li><Link to="#"><i className="fa-brands fa-pinterest-p" /></Link></li>
-                                </ul>
+                                        {/* Danh mục */}
+                                        <div className="d-flex align-items-center">
+                                            <span className="fw-bold me-2" style={{ color: '#222', fontSize: '14px', minWidth: '80px' }}>Danh mục:</span>
+                                            <Link 
+                                                to="/category" 
+                                                className="category-badge"
+                                                style={{
+                                                    background: 'linear-gradient(135deg, #e94560 0%, #c23152 100%)',
+                                                    color: '#fff',
+                                                    padding: '5px 16px',
+                                                    borderRadius: '20px',
+                                                    fontSize: '13px',
+                                                    fontWeight: '600',
+                                                    textDecoration: 'none',
+                                                    boxShadow: '0 4px 10px rgba(233, 69, 96, 0.25)',
+                                                    transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+                                                }}
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.transform = 'translateY(-2px)';
+                                                    e.currentTarget.style.boxShadow = '0 6px 14px rgba(233, 69, 96, 0.35)';
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.transform = 'translateY(0)';
+                                                    e.currentTarget.style.boxShadow = '0 4px 10px rgba(233, 69, 96, 0.25)';
+                                                }}
+                                            >
+                                                <i className="fa-solid fa-layer-group me-2" style={{ fontSize: '12px' }}></i>
+                                                {FALLBACK.category}
+                                            </Link>
+                                        </div>
+
+                                        {/* Thẻ (Tags) */}
+                                        <div className="d-flex align-items-center flex-wrap gap-2">
+                                            <span className="fw-bold me-2" style={{ color: '#222', fontSize: '14px', minWidth: '80px' }}>Thẻ (Tags):</span>
+                                            {FALLBACK.tags.map((tag, idx) => (
+                                                <Link 
+                                                    key={idx} 
+                                                    to="#"
+                                                    className="tag-pill"
+                                                    style={{
+                                                        backgroundColor: '#f8f9fa',
+                                                        color: '#495057',
+                                                        padding: '4px 12px',
+                                                        borderRadius: '6px',
+                                                        fontSize: '13px',
+                                                        textDecoration: 'none',
+                                                        border: '1px solid #dee2e6',
+                                                        transition: 'all 0.2s ease',
+                                                        display: 'inline-flex',
+                                                        alignItems: 'center'
+                                                    }}
+                                                    onMouseEnter={(e) => {
+                                                        e.currentTarget.style.backgroundColor = '#212529';
+                                                        e.currentTarget.style.color = '#fff';
+                                                        e.currentTarget.style.borderColor = '#212529';
+                                                    }}
+                                                    onMouseLeave={(e) => {
+                                                        e.currentTarget.style.backgroundColor = '#f8f9fa';
+                                                        e.currentTarget.style.color = '#495057';
+                                                        e.currentTarget.style.borderColor = '#dee2e6';
+                                                    }}
+                                                >
+                                                    <span style={{ color: '#aaa', marginRight: '4px' }}>#</span>
+                                                    {tag}
+                                                </Link>
+                                            ))}
+                                        </div>
+
+                                        {/* Chia sẻ mạng xã hội */}
+                                        <div className="d-flex align-items-center mt-2">
+                                            <span className="fw-bold me-3" style={{ color: '#222', fontSize: '14px', minWidth: '80px' }}>Chia sẻ:</span>
+                                            <div className="d-flex gap-2">
+                                                {[
+                                                    { icon: 'fa-facebook-f', color: '#1877F2' },
+                                                    { icon: 'fa-twitter', color: '#1DA1F2' },
+                                                    { icon: 'fa-instagram', color: '#E4405F' },
+                                                    { icon: 'fa-pinterest-p', color: '#E60023' },
+                                                    { icon: 'fa-link', color: '#6c757d' } // Nút copy link
+                                                ].map((social, idx) => (
+                                                    <button
+                                                        key={idx}
+                                                        className="social-share-btn"
+                                                        onClick={(e) => e.preventDefault()}
+                                                        style={{
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            width: '38px',
+                                                            height: '38px',
+                                                            borderRadius: '50%',
+                                                            backgroundColor: '#fff',
+                                                            color: social.color,
+                                                            border: `1px solid ${social.color}40`,
+                                                            textDecoration: 'none',
+                                                            transition: 'all 0.3s ease',
+                                                            boxShadow: '0 2px 5px rgba(0,0,0,0.05)',
+                                                            cursor: 'pointer'
+                                                        }}
+                                                        onMouseEnter={(e) => {
+                                                            e.currentTarget.style.backgroundColor = social.color;
+                                                            e.currentTarget.style.color = '#fff';
+                                                            e.currentTarget.style.transform = 'translateY(-3px)';
+                                                            e.currentTarget.style.boxShadow = `0 4px 10px ${social.color}50`;
+                                                        }}
+                                                        onMouseLeave={(e) => {
+                                                            e.currentTarget.style.backgroundColor = '#fff';
+                                                            e.currentTarget.style.color = social.color;
+                                                            e.currentTarget.style.transform = 'translateY(0)';
+                                                            e.currentTarget.style.boxShadow = '0 2px 5px rgba(0,0,0,0.05)';
+                                                        }}
+                                                    >
+                                                        <i className={`fa-brands ${social.icon} ${social.icon === 'fa-link' ? 'fa-solid' : ''}`} />
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
